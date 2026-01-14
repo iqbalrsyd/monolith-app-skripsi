@@ -1,17 +1,21 @@
+// Package services provides business logic for the monolith application.
 package services
 
 import (
 	"fmt"
-	"time"
 	"monolith-app/models"
+	"time"
 )
 
+// UserService handles user-related business logic.
 type UserService struct{}
 
+// NewUserService creates a new UserService instance.
 func NewUserService() *UserService {
 	return &UserService{}
 }
 
+// GetAllUsers retrieves all users from the system.
 func (s *UserService) GetAllUsers() ([]models.User, error) {
 	users := []models.User{
 		{
@@ -30,6 +34,7 @@ func (s *UserService) GetAllUsers() ([]models.User, error) {
 	return users, nil
 }
 
+// GetUserByID retrieves a user by their ID.
 func (s *UserService) GetUserByID(id string) (*models.User, error) {
 	if id == "1" {
 		return &models.User{

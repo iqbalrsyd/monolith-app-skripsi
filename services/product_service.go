@@ -2,16 +2,19 @@ package services
 
 import (
 	"fmt"
-	"time"
 	"monolith-app/models"
+	"time"
 )
 
+// ProductService handles product-related business logic.
 type ProductService struct{}
 
+// NewProductService creates a new ProductService instance.
 func NewProductService() *ProductService {
 	return &ProductService{}
 }
 
+// GetAllProducts retrieves all products from the system.
 func (s *ProductService) GetAllProducts() ([]models.Product, error) {
 	products := []models.Product{
 		{
@@ -34,6 +37,7 @@ func (s *ProductService) GetAllProducts() ([]models.Product, error) {
 	return products, nil
 }
 
+// GetProductByID retrieves a product by its ID.
 func (s *ProductService) GetProductByID(id string) (*models.Product, error) {
 	if id == "1" {
 		return &models.Product{

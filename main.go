@@ -1,3 +1,4 @@
+// Package main is the entry point for the monolith application server.
 package main
 
 import (

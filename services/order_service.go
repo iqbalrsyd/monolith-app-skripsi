@@ -3,15 +3,17 @@ package services
 import (
 	"fmt"
 	"math"
-	"time"
 	"monolith-app/models"
+	"time"
 )
 
+// OrderService handles order-related business logic.
 type OrderService struct {
 	userService    *UserService
 	productService *ProductService
 }
 
+// NewOrderService creates a new OrderService instance.
 func NewOrderService(userService *UserService, productService *ProductService) *OrderService {
 	return &OrderService{
 		userService:    userService,
@@ -19,6 +21,7 @@ func NewOrderService(userService *UserService, productService *ProductService) *
 	}
 }
 
+// CreateOrder creates a new order for a user.
 func (s *OrderService) CreateOrder(userID string, items []models.OrderItem) (*models.Order, error) {
 	total := 0.0
 	for _, item := range items {
@@ -43,6 +46,7 @@ func (s *OrderService) CreateOrder(userID string, items []models.OrderItem) (*mo
 	return order, nil
 }
 
+// GetOrdersByUserID retrieves all orders for a specific user.
 func (s *OrderService) GetOrdersByUserID(userID string) ([]models.Order, error) {
 	orders := []models.Order{
 		{

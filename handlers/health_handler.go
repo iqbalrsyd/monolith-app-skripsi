@@ -4,16 +4,20 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/gin-gonic/gin"
 	"monolith-app/models"
+
+	"github.com/gin-gonic/gin"
 )
 
+// HealthHandler handles health check requests.
 type HealthHandler struct{}
 
+// NewHealthHandler creates a new HealthHandler instance.
 func NewHealthHandler() *HealthHandler {
 	return &HealthHandler{}
 }
 
+// Health handles GET requests for health check.
 func (h *HealthHandler) Health(c *gin.Context) {
 	response := models.HealthResponse{
 		Status:    "healthy",
