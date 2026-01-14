@@ -161,17 +161,43 @@ METRICS_ENABLED=true
 
 ## 🔄 CI/CD Integration
 
-### Jenkins Pipeline
-Repository ini terintegrasi dengan Jenkins pipeline yang melaksanakan:
-1. **Build**: Go compilation dan Docker image creation
-2. **Test**: Unit dan integration tests
-3. **Deploy**: Kubernetes deployment
-4. **Monitor**: Health checks dan metrics collection
+### GitHub Actions Workflows
+Repository ini menggunakan GitHub Actions untuk CI/CD automation:
+
+1. **Go CI** (`.github/workflows/go.yml`)
+   - Build dan test kode Go
+   - Run linting dengan golangci-lint
+   - Generate code coverage reports
+
+2. **Docker Build & Push** (`.github/workflows/docker-image.yml`)
+   - Build Docker image dengan multi-stage build
+   - Push image ke Docker Hub
+   - Security scanning dengan Trivy
+   - Support multiple tags (latest, version, SHA)
+
+3. **Deploy to Production** (`.github/workflows/deploy.yml`)
+   - Auto-deploy setelah Docker build sukses
+   - Deploy via SSH ke server
+   - Health check verification
+   - Support manual deployment dengan workflow_dispatch
+
+📖 **Dokumentasi lengkap**: Lihat [`.github/CICD_SETUP.md`](.github/CICD_SETUP.md) untuk setup dan konfigurasi detail.
+
+### Setup Requirements
+- Docker Hub account dengan credentials di GitHub Secrets
+- SSH access ke deployment server
+- Environment variables configured di GitHub
+
+### Workflow Triggers
+- **Push ke main**: Trigger semua workflows
+- **Pull Request**: Run tests dan build (no deployment)
+- **Tag push (v*)**: Create versioned releases
+- **Manual**: Deploy via GitHub Actions UI
 
 ### GitOps Workflow
 - **Source**: GitHub repository
-- **Build**: Jenkins pipeline
-- **Deploy**: Kubernetes manifests
+- **Build**: GitHub Actions
+- **Deploy**: SSH ke server atau Kubernetes
 - **Monitor**: Prometheus/Grafana
 
 ## 🚀 Deployment Scenarios
